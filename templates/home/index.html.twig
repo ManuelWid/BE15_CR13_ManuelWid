@@ -36,13 +36,6 @@
 {% endblock %}
 
 {% block body %}
-    {# display message if availabe, e.g. after a create or edit #}
-    {% for message in app.flashes('notice') %}
-    <div class="alert alert-success">
-        {{ message }}
-    </div>
-    {% endfor %}
-
     {% if events %} {# if data is found #}
         <div class="container my-5 whitebg pb-5 row mx-auto">
             {% for event in events %}

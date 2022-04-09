@@ -1,6 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+{# display message if availabe, e.g. after a create or edit #}
+{% for message in app.flashes('notice') %}
+<div class="alert alert-success">
+    {{ message }}
+</div>
+{% endfor %}
+
 <div class="container whitebg my-5 p-3">
 <h2 class="page-header"> Event CRUD </h2>
     <table class="table table-striped justify-content-between">

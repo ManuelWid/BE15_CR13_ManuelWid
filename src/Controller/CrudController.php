@@ -43,7 +43,7 @@ class CrudController extends AbstractController
 
             $this->addFlash('notice', 'Event successfully added');
         
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_crud');
         }
 
         return $this->render('crud/create.html.twig', ['form' => $form->createView()]);
@@ -65,7 +65,7 @@ class CrudController extends AbstractController
             $em->flush();
             $this->addFlash('notice', 'Edit successful');
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_crud');
         }
 
         return $this->render('crud/edit.html.twig', ['form' => $form->createView()]);
@@ -83,6 +83,6 @@ class CrudController extends AbstractController
         $em->flush();
         $this->addFlash('notice', 'Event removed');
         
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('app_crud');
     }
 }

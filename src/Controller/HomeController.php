@@ -42,12 +42,4 @@ class HomeController extends AbstractController
         $event = $doctrine->getRepository(Events::class)->find($id);
         return $this->render('home/details.html.twig', ['event' => $event]);
     }
-
-    /**
-     * @Route("/map", name="app_map")
-     */
-    public function map(): Response
-    {
-        return $this->render('home/map.html.twig');
-    }
 }
