@@ -28,23 +28,27 @@
     }
     .card {
         transition: all .1s ease-in-out;
+        width: 16rem;
+        height: 100%;
     }
     .card:hover {
         transform: scale(1.05);
     }
+    /* .card-text {
+        max-height: 10em;
+    } */
     </style>
 {% endblock %}
-
 {% block body %}
     {% if events %} {# if data is found #}
-        <div class="container my-5 whitebg pb-5 row mx-auto">
+        <div class="container my-5 whitebg pb-5 row mx-auto gx-5">
             {% for event in events %}
                 <div class="col-lg-3 col-md-4 col-sm-6 mt-5">
-                    <div class="card" style="width: 16rem;">
+                    <div class="card">
                         <img src="{{event.picture}}" class="card-img-top" alt="A picture of a festival." style="height: 10em">
                         <div class="card-body">
                             <h5 class="card-title">{{event.name}}</h5>
-                            <p class="card-text">{{event.description}}</p>
+                            <p class="card-text text-truncate">{{event.description}}</p>
                         </div>
 
                         <ul class="list-group list-group-flush">
