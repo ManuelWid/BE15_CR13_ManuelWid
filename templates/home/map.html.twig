@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="mb-3" id="map"></div>
+<input type="text" class="w-50" id="address" placeholder="Enter address or city name">
+<input type="button" class="btn btn-success" value="Add" onclick="getLocation()">
+<script>
+    let url="https://maps.googleapis.com/maps/api/geocode/json?address=wien&key=AIzaSyBtjaD-saUZQ47PbxigOg25cvuO6_SuX3M";
+    
+    function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 55, lng: 55}, zoom: 11
+    });
+
+    var pinpoint = new google.maps.Marker({
+        position: {lat: 55, lng: 55}, 
+        map: map
+    });
+}
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBtjaD-saUZQ47PbxigOg25cvuO6_SuX3M&callback=initMap" async defer></script>
+{% endblock %}

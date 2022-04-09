@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+    .dropdown {
+        display: inline-block;
+        position: relative;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        width: 100%;
+        overflow: auto;
+        box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+    }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    .dropdown-content a {
+        display: block;
+        color: #000000;
+        padding: 5px;
+        text-decoration: none;
+    }
+    .dropdown-content a:hover {
+        color: #FFFFFF;
+        background-color: #00A4BD;
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+    {# display message if availabe, e.g. after a create or edit #}
+    {% for message in app.flashes('notice') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    {% if events %} {# if data is found #}
+        <div class="container my-5 whitebg pb-5 row mx-auto">
+            {% for event in events %}
+                <div class="col-lg-3 col-md-4 col-sm-6 mt-5">
+                    <div class="card" style="width: 16rem;">
+                        <img src="{{event.picture}}" class="card-img-top" alt="A picture of a festival." style="height: 10em">
+                        <div class="card-body">
+                            <h5 class="card-title">{{event.name}}</h5>
+                            <p class="card-text">{{event.description}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Start: {{event.dateStart|date()}}</li>
+                        <li class="list-group-item">End: {{event.endDate|date()}}</li>
+                        <li class="list-group-item">City: {{event.city}}</li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="/details/{{event.id}}" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %} {# if no data is found #}
+        <div class="container mt-5">
+            <center><span><b>No Data found.</b></span></center>
+        </div>
+    {% endif %}
+{% endblock %}
