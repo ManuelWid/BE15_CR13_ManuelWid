@@ -26,6 +26,12 @@
         color: #FFFFFF;
         background-color: #00A4BD;
     }
+    .card {
+        transition: all .1s ease-in-out;
+    }
+    .card:hover {
+        transform: scale(1.05);
+    }
     </style>
 {% endblock %}
 
@@ -47,14 +53,13 @@
                             <h5 class="card-title">{{event.name}}</h5>
                             <p class="card-text">{{event.description}}</p>
                         </div>
+
                         <ul class="list-group list-group-flush">
                         <li class="list-group-item">Start: {{event.dateStart|date()}}</li>
                         <li class="list-group-item">End: {{event.endDate|date()}}</li>
                         <li class="list-group-item">City: {{event.city}}</li>
                         </ul>
-                        <div class="card-body">
-                            <a href="/details/{{event.id}}" class="btn btn-primary">Details</a>
-                        </div>
+                        <a href="/details/{{event.id}}" class="stretched-link"></a>
                     </div>
                 </div>
             {% endfor %}

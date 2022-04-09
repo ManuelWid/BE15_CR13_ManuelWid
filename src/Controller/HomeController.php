@@ -29,7 +29,7 @@ class HomeController extends AbstractController
     {
         $category = $request->query->get('cat');
         //dd($category);
-        $events = $doctrine->getRepository(Events::class)->findByEventType($category);
+        $events = $doctrine->getRepository(Events::class)->findBy(['eventType' => $category]);
         // dd($events);
         return $this->render('home/index.html.twig', ['events' => $events]);
     }

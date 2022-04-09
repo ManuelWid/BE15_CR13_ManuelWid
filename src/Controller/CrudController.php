@@ -18,11 +18,11 @@ class CrudController extends AbstractController
     /**
      * @Route("/", name="app_crud")
      */
-    public function crudAction(): Response
+    public function crudIndex(ManagerRegistry $doctrine): Response
     {
-        return $this->render('crud/index.html.twig', [
-            'controller_name' => 'CrudController',
-        ]);
+        $events = $doctrine->getRepository(Events::class)->findAll();
+        // dd($events);
+        return $this->render('crud/index.html.twig', ['events' => $events]);
     }
 
     /**
