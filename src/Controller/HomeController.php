@@ -30,8 +30,13 @@ class HomeController extends AbstractController
         $category = $request->query->get('cat');
         //dd($category);
         $events = $doctrine->getRepository(Events::class)->findBy(['eventType' => $category]);
-        // dd($events);
-        return $this->render('home/index.html.twig', ['events' => $events]);
+        //dd($events);
+        if($events){
+            return $this->render('home/index.html.twig', ['events' => $events]);
+        }else{
+            $this->addFlash('notice', 'Category empty or not found.');
+            return $this->redirectToRoute('app_home');
+        }
     }
 
     /**

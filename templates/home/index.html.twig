@@ -34,12 +34,20 @@
     .card:hover {
         transform: scale(1.05);
     }
-    /* .card-text {
-        max-height: 10em;
-    } */
+    .card-text {
+        height: 4em;
+        overflow: hidden;
+    }
     </style>
 {% endblock %}
+
 {% block body %}
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     {% if events %} {# if data is found #}
         <div class="container my-5 whitebg pb-5 row mx-auto gx-5">
             {% for event in events %}
@@ -48,7 +56,7 @@
                         <img src="{{event.picture}}" class="card-img-top" alt="A picture of a festival." style="height: 10em">
                         <div class="card-body">
                             <h5 class="card-title">{{event.name}}</h5>
-                            <p class="card-text text-truncate">{{event.description}}</p>
+                            <p class="card-text">{{event.description}}</p> 
                         </div>
 
                         <ul class="list-group list-group-flush">
@@ -62,7 +70,7 @@
             {% endfor %}
         </div>
     {% else %} {# if no data is found #}
-        <div class="container mt-5">
+        <div class="container mt-5 whitebg p-3">
             <center><span><b>No Data found.</b></span></center>
         </div>
     {% endif %}
