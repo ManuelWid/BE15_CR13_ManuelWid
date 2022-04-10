@@ -41,8 +41,9 @@
 
 <body>
     {% include "components/navbar.html.twig" %}
-
-    {% block body %}{% endblock %}
+    <div class="container">
+        {% block body %}{% endblock %}
+    </div>
 
     {# Select active link in navbar #}
     <script>

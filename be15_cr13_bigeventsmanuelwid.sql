@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 09. Apr 2022 um 18:36
+-- Erstellungszeit: 10. Apr 2022 um 13:59
 -- Server-Version: 10.4.22-MariaDB
 -- PHP-Version: 7.4.28
 
@@ -60,7 +60,7 @@ CREATE TABLE `events` (
   `phone` int(11) NOT NULL,
   `address` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `city` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `zip` int(11) DEFAULT NULL,
+  `zip` int(11) NOT NULL,
   `event_url` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `event_type` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -89,8 +89,7 @@ INSERT INTO `events` (`id`, `name`, `description`, `date_start`, `end_date`, `pi
 (45, 'Carolina Wild Petunia', 'sit amet lobortis sapien sapien non mi integer ac neque duis bibendum morbi non quam nec', '2022-04-14 15:51:26', '2022-01-26 20:53:08', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMXmw6jebzPFQJM_jrQgPelCjGyCxt-4xkPA&usqp=CAU', 6699, 'borryf@cdbaby.com', 2147483647, 'Golden Leaf', 'Yingcui', 123, 'https://tinyurl.com/odio/odio/elementum/eu.png', 'music'),
 (46, 'Franciscan Erigeron', 'magnis dis parturient montes nascetur ridiculus mus etiam vel augue vestibulum rutrum rutrum neque aenean auctor gravida sem praesent id', '2021-05-02 03:52:26', '2022-01-21 08:01:22', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQazKj4kYlNzkw6hS0ZjGXQFBfc-c0dYzmcUA&usqp=CAU', 10748, 'lschoenleiterg@yahoo.com', 2147483647, 'Continental', 'Ar Riqqah', 15919, 'http://cargocollective.com/at/ipsum/ac/tellus.html', 'sport'),
 (47, 'Mojave Yucca', 'vivamus tortor duis mattis egestas metus aenean fermentum donec ut mauris eget massa tempor convallis nulla neque libero convallis eget', '2022-08-17 03:21:22', '2021-07-13 13:52:47', 'https://1000things.b-cdn.net/app/uploads/festivals-rund-um-wien-header.jpg', 13327, 'mmccowenh@sun.com', 2147483647, 'Del Sol', 'Varzea da Palma', 39260, 'https://163.com/maecenas/pulvinar/lobortis/est/phasellus.js', 'theater'),
-(48, 'Undulate Speedwell', 'mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed', '2022-12-02 02:48:02', '2021-06-23 11:59:55', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyyuxJ-r9Ltsud185MEQrPs2FZprK0lmOTJw&usqp=CAU', 5510, 'flovegrovei@ted.com', 2147483647, 'Charing Cross', 'Siso', 15956, 'https://360.cn/massa/tempor/convallis/nulla/neque/libero.png', 'music'),
-(49, 'Limestone Bedstraw', 'mauris vulputate elementum nullam varius nulla facilisi cras non velit nec nisi vulputate nonummy maecenas tincidunt lacus at velit vivamus', '2021-08-04 03:04:58', '2022-02-17 08:46:18', 'https://cdn.pixabay.com/photo/2017/06/07/18/06/the-festival-of-colors-2381121_1280.jpg', 16544, 'rkunaj@forbes.com', 1251959810, 'Browning', 'Libano', 731048, 'http://umn.edu/quis/turpis/sed.jsp', 'sport');
+(48, 'Undulate Speedwell', 'mattis pulvinar nulla pede ullamcorper augue a suscipit nulla elit ac nulla sed', '2022-12-02 02:48:02', '2021-06-23 11:59:55', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyyuxJ-r9Ltsud185MEQrPs2FZprK0lmOTJw&usqp=CAU', 5510, 'flovegrovei@ted.com', 2147483647, 'Charing Cross', 'Siso', 15956, 'https://360.cn/massa/tempor/convallis/nulla/neque/libero.png', 'music');
 
 -- --------------------------------------------------------
 
@@ -107,6 +106,27 @@ CREATE TABLE `messenger_messages` (
   `available_at` datetime NOT NULL,
   `delivered_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellenstruktur für Tabelle `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `email` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roles` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Daten für Tabelle `user`
+--
+
+INSERT INTO `user` (`id`, `email`, `roles`, `password`) VALUES
+(1, 'admin@mail.com', '[\"ROLE_ADMIN\"]', '$2y$13$PGPdNBQGD4NBq9kwVrEtTuMhToMvfRESpfL0C.sPBDcrxUTIc6NzK'),
+(2, 'user@mail.com', '[]', '$2y$13$qfAzCZ6uts02f9gpZxd7oOVHZW2gaOvqTt5ZOQdvS7SovWrw8IwEm');
 
 --
 -- Indizes der exportierten Tabellen
@@ -134,6 +154,13 @@ ALTER TABLE `messenger_messages`
   ADD KEY `IDX_75EA56E016BA31DB` (`delivered_at`);
 
 --
+-- Indizes für die Tabelle `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `UNIQ_8D93D649E7927C74` (`email`);
+
+--
 -- AUTO_INCREMENT für exportierte Tabellen
 --
 
@@ -148,6 +175,12 @@ ALTER TABLE `events`
 --
 ALTER TABLE `messenger_messages`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT für Tabelle `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
